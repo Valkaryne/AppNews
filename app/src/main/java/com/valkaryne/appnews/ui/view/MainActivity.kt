@@ -1,7 +1,8 @@
-package com.valkaryne.appnews
+package com.valkaryne.appnews.ui.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.valkaryne.appnews.R
 
 class MainActivity : AppCompatActivity() {
 
