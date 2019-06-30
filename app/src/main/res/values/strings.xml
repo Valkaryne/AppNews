@@ -2,4 +2,5 @@
     <string name="app_name">AppNews</string>
 
     <string name="news_image_description">News Image</string>
+    <string name="go_to_source">GO TO SOURCE</string>
 </resources>

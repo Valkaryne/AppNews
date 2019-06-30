@@ -12,8 +12,10 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.valkaryne.appnews.R
 import com.valkaryne.appnews.repository.model.NewsEntity
+import com.valkaryne.appnews.ui.listeners.ItemClickListener
 
-class NewsPageListAdapter : PagedListAdapter<NewsEntity, NewsPageListAdapter.ViewHolder>(NewsEntity.DIFF_CALLBACK) {
+class NewsPageListAdapter(private val itemClickListener: ItemClickListener) :
+    PagedListAdapter<NewsEntity, NewsPageListAdapter.ViewHolder>(NewsEntity.DIFF_CALLBACK) {
 
     private lateinit var context: Context
 
@@ -39,6 +41,8 @@ class NewsPageListAdapter : PagedListAdapter<NewsEntity, NewsPageListAdapter.Vie
 
         tvTitle.text = news.title
         tvDate.text = news.publishedAt
+
+        itemView.setOnClickListener { itemClickListener.onItemClick(news) }
     }
 
     inner class ViewHolder(val item: CardView) : RecyclerView.ViewHolder(item)
