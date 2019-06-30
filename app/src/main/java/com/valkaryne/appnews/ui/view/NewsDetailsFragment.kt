@@ -1,5 +1,7 @@
 package com.valkaryne.appnews.ui.view
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +14,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.valkaryne.appnews.R
+import com.valkaryne.appnews.repository.model.NewsEntity
 import com.valkaryne.appnews.ui.viewmodel.NewsDetailsViewModel
 
 class NewsDetailsFragment : Fragment() {
@@ -40,9 +43,16 @@ class NewsDetailsFragment : Fragment() {
                 .load(it.urlToImage)
                 .apply(RequestOptions.fitCenterTransform())
                 .into(ivImage)
+
             tvTitle.text = news.title
             tvDate.text = news.publishedAt
             tvDescription.text = news.description
+
+            btnFull.setOnClickListener { readFullArticle(news) }
         }
+    }
+
+    private fun readFullArticle(news: NewsEntity) {
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(news.url)))
     }
 }
