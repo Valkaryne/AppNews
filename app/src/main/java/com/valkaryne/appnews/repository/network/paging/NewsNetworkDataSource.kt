@@ -19,6 +19,7 @@ class NewsNetworkDataSource : PageKeyedDataSource<String, NewsEntity>() {
     private val networkState = MutableLiveData<NetworkState>()
 
     fun getNetworkState(): LiveData<NetworkState> = networkState
+    fun getNews(): LiveData<List<NewsEntity>> = newsData
 
     override fun loadInitial(
         params: LoadInitialParams<String>,

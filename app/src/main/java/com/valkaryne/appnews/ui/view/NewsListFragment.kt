@@ -47,6 +47,7 @@ class NewsListFragment : Fragment(), ItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         layoutRefresh.setOnRefreshListener {
+            layoutRefresh.isRefreshing = false
             listViewModel.refresh()
         }
     }
@@ -69,14 +70,19 @@ class NewsListFragment : Fragment(), ItemClickListener {
                 switchProgressBarStatus(it)
             })
         listViewModel.news.observe(this,
-            Observer<PagedList<NewsEntity>> { list -> pageListAdapter.submitList(list) })
+            Observer<PagedList<NewsEntity>> { list ->
+                pageListAdapter.submitList(list)
+            })
         recyclerView.adapter = pageListAdapter
     }
 
     private fun switchProgressBarStatus(state: NetworkState) {
         when (state.getStatus()) {
             NetworkState.Status.RUNNING -> layoutRefresh.isRefreshing = true
-            NetworkState.Status.SUCCEED -> layoutRefresh.isRefreshing = false
+            NetworkState.Status.SUCCEED -> {
+                layoutRefresh.isRefreshing = false
+                listViewModel.saveNewsToCache()
+            }
             NetworkState.Status.FAILED -> {
                 Toast.makeText(
                     context,

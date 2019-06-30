@@ -6,14 +6,18 @@ import androidx.paging.PagedList
 import com.valkaryne.appnews.repository.model.NewsEntity
 import com.valkaryne.appnews.repository.network.NewsNetwork
 import com.valkaryne.appnews.repository.network.paging.NewsNetworkDataSourceFactory
+import com.valkaryne.appnews.repository.room.NewsDatabase
 
-class NewsRepository {
+class NewsRepository(private val database: NewsDatabase) {
 
     private val boundaryCallback: PagedList.BoundaryCallback<NewsEntity>  by lazy {
         object : PagedList.BoundaryCallback<NewsEntity>() {
             override fun onZeroItemsLoaded() {
                 super.onZeroItemsLoaded()
-                // Load data from database
+                liveDataMerger.addSource(database.newsPaged) { value ->
+                    liveDataMerger.postValue(value)
+                    liveDataMerger.removeSource(database.newsPaged)
+                }
             }
         }
     }
@@ -31,4 +35,10 @@ class NewsRepository {
     fun getNews(): LiveData<PagedList<NewsEntity>> = liveDataMerger
 
     fun getNetworkState() = network.networkState
+
+    fun insertNewsToDB(list: List<NewsEntity>?) {
+        Thread {
+            list?.forEach { database.newsDao().insertNews(it) }
+        }.start()
+    }
 }

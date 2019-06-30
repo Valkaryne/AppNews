@@ -1,11 +1,15 @@
 package com.valkaryne.appnews.repository.model
 
 import androidx.recyclerview.widget.DiffUtil
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+@Entity(tableName = "news")
 data class NewsEntity(
-    val title: String,
-    val urlToImage: String,
-    val publishedAt: String,
+    @PrimaryKey val title: String,
+    @ColumnInfo(name = "url_to_image") val urlToImage: String,
+    @ColumnInfo(name = "published_at") val publishedAt: String,
     val description: String,
     val url: String
 ) {
