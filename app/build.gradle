@@ -31,6 +31,19 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha06'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.android.support:design:28.0.0'
+    // Retrofit Components
+    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
+    // AAC: Paging
+    implementation 'android.arch.paging:runtime:1.0.1'
+    // AAC: Lifecycle
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0-alpha01'
+    kapt 'androidx.lifecycle:lifecycle-compiler:2.2.0-alpha01'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-alpha01'
+    // Glide Components
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    kapt 'com.github.bumptech.glide:compiler:4.9.0'
+
     // Test
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
