@@ -1,5 +1,6 @@
 package com.valkaryne.appnews.ui.view
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +23,9 @@ import com.valkaryne.appnews.ui.viewmodel.NewsListViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class NewsListFragment : Fragment(), ItemClickListener {
+
+    private val isPortrait
+        get() = resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
 
     private val listViewModel: NewsListViewModel by sharedViewModel()
     private val detailsViewModel: NewsDetailsViewModel by sharedViewModel()
@@ -55,12 +59,21 @@ class NewsListFragment : Fragment(), ItemClickListener {
     override fun onItemClick(newsEntity: NewsEntity) {
         detailsViewModel.postEntity(newsEntity)
         if (!detailsViewModel.entityHasActiveObservers()) {
-            val detailsFragment = NewsDetailsFragment()
-            activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.fragments_container, detailsFragment)
-                ?.addToBackStack(null)
-                ?.commit()
+            fragmentTransaction()
         }
+    }
+
+    private fun fragmentTransaction() {
+        val fragmentContainer = if (isPortrait) {
+            R.id.fragments_container
+        } else {
+            R.id.fragments_container_details
+        }
+        requireActivity().supportFragmentManager.popBackStack()
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(fragmentContainer, NewsDetailsFragment())
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun registerObservers() {

@@ -46,8 +46,11 @@ class NewsDetailsFragment : Fragment() {
             tvTitle.text = news.title
             tvDate.text = news.publishedAt
             tvDescription.text = news.description
-
             btnFull.setOnClickListener { readFullArticle(news) }
+        }
+
+        if (news == null) {
+            btnFull.visibility = View.GONE
         }
     }
 
