@@ -7,7 +7,10 @@ class NewsListViewModel : ViewModel() {
 
     private val repository = NewsRepository()
 
+    val networkState = repository.getNetworkState()
     val news = repository.getNews()
 
-    val networkState = repository.getNetworkState()
+    fun refresh() {
+        news.value!!.dataSource.invalidate()
+    }
 }

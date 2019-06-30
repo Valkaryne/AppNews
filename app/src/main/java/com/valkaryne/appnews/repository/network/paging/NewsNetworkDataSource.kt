@@ -15,11 +15,10 @@ import retrofit2.Response
 class NewsNetworkDataSource : PageKeyedDataSource<String, NewsEntity>() {
 
     private val newsService = NewsAPIService.retrofit.create(NewsAPIService::class.java)
-    private val networkState = MutableLiveData<NetworkState>()
     private val newsData = MutableLiveData<List<NewsEntity>>()
+    private val networkState = MutableLiveData<NetworkState>()
 
     fun getNetworkState(): LiveData<NetworkState> = networkState
-    fun getNewsData(): LiveData<List<NewsEntity>> = newsData
 
     override fun loadInitial(
         params: LoadInitialParams<String>,
@@ -58,6 +57,7 @@ class NewsNetworkDataSource : PageKeyedDataSource<String, NewsEntity>() {
         params: LoadParams<String>,
         loadCallback: LoadCallback<String, NewsEntity>
     ) {
+        //Log.d("SuperCat", "Load After")
         networkState.postValue(NetworkState.LOADING)
 
         val page = params.key.toInt()
@@ -69,7 +69,10 @@ class NewsNetworkDataSource : PageKeyedDataSource<String, NewsEntity>() {
                 response: Response<NewsAPIResponse>
             ) {
                 if (response.isSuccessful) {
-                    loadCallback.onResult(response.body()!!.newsEntities.toMutableList(), (page + 1).toString())
+                    loadCallback.onResult(
+                        response.body()!!.newsEntities.toMutableList(),
+                        (page + 1).toString()
+                    )
                     networkState.postValue(NetworkState.SUCCESS)
                     newsData.postValue(response.body()!!.newsEntities)
                 } else {

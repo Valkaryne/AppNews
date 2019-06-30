@@ -3,9 +3,9 @@ package com.valkaryne.appnews.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.paging.PagedList
-import com.valkaryne.appnews.repository.model.NetworkState
 import com.valkaryne.appnews.repository.model.NewsEntity
 import com.valkaryne.appnews.repository.network.NewsNetwork
+import com.valkaryne.appnews.repository.network.paging.NewsNetworkDataSourceFactory
 
 class NewsRepository {
 
@@ -18,7 +18,8 @@ class NewsRepository {
         }
     }
 
-    private val network: NewsNetwork = NewsNetwork(boundaryCallback)
+    private val dataSourceFactory = NewsNetworkDataSourceFactory()
+    private val network: NewsNetwork = NewsNetwork(dataSourceFactory, boundaryCallback)
     private val liveDataMerger: MediatorLiveData<PagedList<NewsEntity>> = MediatorLiveData()
 
     init {
@@ -29,5 +30,5 @@ class NewsRepository {
 
     fun getNews(): LiveData<PagedList<NewsEntity>> = liveDataMerger
 
-    fun getNetworkState(): LiveData<NetworkState> = network.networkState
+    fun getNetworkState() = network.networkState
 }
