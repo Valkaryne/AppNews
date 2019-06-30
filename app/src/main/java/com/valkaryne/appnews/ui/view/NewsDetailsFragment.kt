@@ -10,22 +10,21 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.valkaryne.appnews.R
 import com.valkaryne.appnews.repository.model.NewsEntity
 import com.valkaryne.appnews.ui.viewmodel.NewsDetailsViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class NewsDetailsFragment : Fragment() {
-    private lateinit var viewModel: NewsDetailsViewModel
+    private val viewModel: NewsDetailsViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProviders.of(requireActivity()).get(NewsDetailsViewModel::class.java)
         return inflater.inflate(R.layout.fragment_news_details, container, false)
     }
 

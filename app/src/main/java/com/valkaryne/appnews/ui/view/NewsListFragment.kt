@@ -8,7 +8,6 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,11 +19,12 @@ import com.valkaryne.appnews.ui.adapter.NewsPageListAdapter
 import com.valkaryne.appnews.ui.listeners.ItemClickListener
 import com.valkaryne.appnews.ui.viewmodel.NewsDetailsViewModel
 import com.valkaryne.appnews.ui.viewmodel.NewsListViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class NewsListFragment : Fragment(), ItemClickListener {
 
-    private lateinit var listViewModel: NewsListViewModel
-    private lateinit var detailsViewModel: NewsDetailsViewModel
+    private val listViewModel: NewsListViewModel by sharedViewModel()
+    private val detailsViewModel: NewsDetailsViewModel by sharedViewModel()
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var progressBar: ProgressBar
@@ -40,7 +40,6 @@ class NewsListFragment : Fragment(), ItemClickListener {
         progressBar = view.findViewById(R.id.progress_bar)
         layoutRefresh = view.findViewById(R.id.layout_refresh)
         recyclerView.layoutManager = LinearLayoutManager(context)
-        listViewModel = ViewModelProviders.of(requireActivity()).get(NewsListViewModel::class.java)
         registerObservers()
         return view
     }
@@ -72,8 +71,6 @@ class NewsListFragment : Fragment(), ItemClickListener {
         listViewModel.news.observe(this,
             Observer<PagedList<NewsEntity>> { list -> pageListAdapter.submitList(list) })
         recyclerView.adapter = pageListAdapter
-
-        detailsViewModel = ViewModelProviders.of(requireActivity()).get(NewsDetailsViewModel::class.java)
     }
 
     private fun switchProgressBarStatus(state: NetworkState) {

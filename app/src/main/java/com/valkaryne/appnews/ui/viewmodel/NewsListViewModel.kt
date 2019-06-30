@@ -3,9 +3,7 @@ package com.valkaryne.appnews.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import com.valkaryne.appnews.repository.NewsRepository
 
-class NewsListViewModel : ViewModel() {
-
-    private val repository = NewsRepository()
+class NewsListViewModel(repository: NewsRepository) : ViewModel() {
 
     val networkState = repository.getNetworkState()
     val news = repository.getNews()
