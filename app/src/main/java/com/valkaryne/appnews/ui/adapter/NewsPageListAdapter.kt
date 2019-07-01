@@ -13,6 +13,10 @@ import com.bumptech.glide.request.RequestOptions
 import com.valkaryne.appnews.R
 import com.valkaryne.appnews.repository.model.NewsEntity
 import com.valkaryne.appnews.ui.listeners.ItemClickListener
+import com.valkaryne.appnews.utils.DATE_PATTERN
+import com.valkaryne.appnews.utils.DATE_PATTERN_PUBLISH
+import com.valkaryne.appnews.utils.convertToString
+import com.valkaryne.appnews.utils.convertToTimestamp
 
 class NewsPageListAdapter(private val itemClickListener: ItemClickListener) :
     PagedListAdapter<NewsEntity, NewsPageListAdapter.ViewHolder>(NewsEntity.DIFF_CALLBACK) {
@@ -40,7 +44,8 @@ class NewsPageListAdapter(private val itemClickListener: ItemClickListener) :
             .into(ivImage)
 
         tvTitle.text = news.title
-        tvDate.text = news.publishedAt
+        tvDate.text = news.publishedAt.convertToTimestamp(DATE_PATTERN)
+            .convertToString(DATE_PATTERN_PUBLISH)
 
         itemView.setOnClickListener { itemClickListener.onItemClick(news) }
     }

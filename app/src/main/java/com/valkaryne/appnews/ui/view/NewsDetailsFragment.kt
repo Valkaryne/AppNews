@@ -15,6 +15,10 @@ import com.bumptech.glide.request.RequestOptions
 import com.valkaryne.appnews.R
 import com.valkaryne.appnews.repository.model.NewsEntity
 import com.valkaryne.appnews.ui.viewmodel.NewsDetailsViewModel
+import com.valkaryne.appnews.utils.DATE_PATTERN
+import com.valkaryne.appnews.utils.DATE_PATTERN_PUBLISH
+import com.valkaryne.appnews.utils.convertToString
+import com.valkaryne.appnews.utils.convertToTimestamp
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class NewsDetailsFragment : Fragment() {
@@ -44,7 +48,8 @@ class NewsDetailsFragment : Fragment() {
                 .into(ivImage)
 
             tvTitle.text = news.title
-            tvDate.text = news.publishedAt
+            tvDate.text = news.publishedAt.convertToTimestamp(DATE_PATTERN)
+                .convertToString(DATE_PATTERN_PUBLISH)
             tvDescription.text = news.description
             btnFull.setOnClickListener { readFullArticle(news) }
         }
