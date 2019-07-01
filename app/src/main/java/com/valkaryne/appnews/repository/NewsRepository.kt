@@ -8,6 +8,12 @@ import com.valkaryne.appnews.repository.network.NewsNetwork
 import com.valkaryne.appnews.repository.network.paging.NewsNetworkDataSourceFactory
 import com.valkaryne.appnews.repository.room.NewsDatabase
 
+/**
+ * The base of application repository has two sources: local and network. It responsible for fetching
+ * data and giving it to the ViewModel.
+ *
+ * @author Valentine Litvin
+ */
 class NewsRepository(private val database: NewsDatabase) {
 
     private val boundaryCallback: PagedList.BoundaryCallback<NewsEntity>  by lazy {
@@ -32,10 +38,21 @@ class NewsRepository(private val database: NewsDatabase) {
         }
     }
 
+    /**
+     * @return news LiveData
+     */
     fun getNews(): LiveData<PagedList<NewsEntity>> = liveDataMerger
 
+    /**
+     * @return network state LiveData
+     */
     fun getNetworkState() = network.networkState
 
+    /**
+     * Inserts list of news to the local database
+     *
+     * @param list list of the news to be inserted
+     */
     fun insertNewsToDB(list: List<NewsEntity>?) {
         Thread {
             list?.forEach { database.newsDao().insertNews(it) }

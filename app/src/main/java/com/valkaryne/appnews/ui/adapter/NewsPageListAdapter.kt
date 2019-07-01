@@ -18,6 +18,11 @@ import com.valkaryne.appnews.utils.DATE_PATTERN_PUBLISH
 import com.valkaryne.appnews.utils.convertToString
 import com.valkaryne.appnews.utils.convertToTimestamp
 
+/**
+ * [NewsPageListAdapter] is used for displaying [NewsEntity] list in [RecyclerView]
+ *
+ * @author Valentine Litvin
+ */
 class NewsPageListAdapter(private val itemClickListener: ItemClickListener) :
     PagedListAdapter<NewsEntity, NewsPageListAdapter.ViewHolder>(NewsEntity.DIFF_CALLBACK) {
 

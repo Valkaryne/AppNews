@@ -7,8 +7,21 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
+/**
+ * Interface responsible for calls to API
+ *
+ * @author Valentine Litvin
+ */
 interface NewsAPIService {
 
+    /**
+     * Method calling to the API
+     *
+     * @param apiKey key to get access to the API
+     * @param page number of page to return
+     * @param country country news you want to get from
+     * @return response from the API
+     */
     @GET("top-headlines")
     fun getNews(
         @Query("apiKey") apiKey: String,

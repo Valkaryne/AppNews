@@ -4,6 +4,11 @@ import androidx.paging.PageKeyedDataSource
 import com.valkaryne.appnews.repository.model.NewsEntity
 import com.valkaryne.appnews.repository.room.NewsDao
 
+/**
+ * Data Source for news fetched from local database.
+ *
+ * @author Valentine Litvin
+ */
 class NewsRoomDataSource(private val dao: NewsDao) : PageKeyedDataSource<String, NewsEntity>() {
 
     override fun loadInitial(

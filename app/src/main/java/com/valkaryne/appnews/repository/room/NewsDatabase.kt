@@ -10,6 +10,11 @@ import com.valkaryne.appnews.repository.model.NewsEntity
 import com.valkaryne.appnews.repository.room.paging.NewsRoomDataSourceFactory
 import java.util.concurrent.Executors
 
+/**
+ * Part of repository responsible for fetching data from local database
+ *
+ * @author Valentine Litvin
+ */
 @Database(entities = [NewsEntity::class], version = 1)
 abstract class NewsDatabase : RoomDatabase() {
     val newsPaged: LiveData<PagedList<NewsEntity>>

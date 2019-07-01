@@ -9,6 +9,11 @@ import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
+/**
+ * Simple module for Koin
+ *
+ * @author Valentine Litvin
+ */
 val mainAppModule = module {
     // Repository
     single {

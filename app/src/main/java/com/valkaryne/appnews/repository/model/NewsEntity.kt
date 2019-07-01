@@ -5,6 +5,11 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * Data class describing news entity
+ *
+ * @author Valentine Litvin
+ */
 @Entity(tableName = "news")
 data class NewsEntity(
     @PrimaryKey val title: String,

@@ -4,6 +4,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import com.valkaryne.appnews.repository.model.NewsEntity
 
+/**
+ * A Factory for network data source
+ *
+ * @author Valentine Litvin
+ */
 class NewsNetworkDataSourceFactory : DataSource.Factory<String, NewsEntity>() {
 
     val sourceLiveData = MutableLiveData<NewsNetworkDataSource>()

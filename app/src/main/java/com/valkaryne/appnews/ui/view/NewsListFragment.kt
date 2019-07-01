@@ -22,6 +22,11 @@ import com.valkaryne.appnews.ui.viewmodel.NewsDetailsViewModel
 import com.valkaryne.appnews.ui.viewmodel.NewsListViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
+/**
+ * [NewsListFragment] displays list of fetched news in the shape of [RecyclerView]
+ *
+ * @author Valentine Litvin
+ */
 class NewsListFragment : Fragment(), ItemClickListener {
 
     private val isPortrait

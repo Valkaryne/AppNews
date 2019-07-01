@@ -21,6 +21,11 @@ import com.valkaryne.appnews.utils.convertToString
 import com.valkaryne.appnews.utils.convertToTimestamp
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
+/**
+ * [NewsDetailsFragment] displays detailed information about selected news
+ *
+ * @author Valentine Litvin
+ */
 class NewsDetailsFragment : Fragment() {
     private val viewModel: NewsDetailsViewModel by sharedViewModel()
 

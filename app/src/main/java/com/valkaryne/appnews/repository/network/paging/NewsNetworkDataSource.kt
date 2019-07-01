@@ -12,13 +12,25 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+/**
+ * Data Source for news fetched from network.
+ *
+ * @author Valentine Litvin
+ */
 class NewsNetworkDataSource : PageKeyedDataSource<String, NewsEntity>() {
 
     private val newsService = NewsAPIService.retrofit.create(NewsAPIService::class.java)
     private val newsData = MutableLiveData<List<NewsEntity>>()
     private val networkState = MutableLiveData<NetworkState>()
 
+    /**
+     * @return immutable network state LiveData
+     */
     fun getNetworkState(): LiveData<NetworkState> = networkState
+
+    /**
+     * @return immutable news list LiveData
+     */
     fun getNews(): LiveData<List<NewsEntity>> = newsData
 
     override fun loadInitial(

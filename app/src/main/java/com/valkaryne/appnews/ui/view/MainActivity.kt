@@ -5,6 +5,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.valkaryne.appnews.R
 
+/**
+ * The [MainActivity] contains main fragments and resolves their position depending on screen
+ * orientation
+ *
+ * @author Valentine Litvin
+ */
 class MainActivity : AppCompatActivity() {
 
     private val isPortrait

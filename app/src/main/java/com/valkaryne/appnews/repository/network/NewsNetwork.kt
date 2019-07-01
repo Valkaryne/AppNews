@@ -11,7 +11,15 @@ import com.valkaryne.appnews.repository.model.NewsEntity
 import com.valkaryne.appnews.repository.network.paging.NewsNetworkDataSourceFactory
 import java.util.concurrent.Executors
 
-class NewsNetwork(dataSourceFactory: NewsNetworkDataSourceFactory, boundaryCallback: PagedList.BoundaryCallback<NewsEntity>) {
+/**
+ * Part of repository responsible for fetching data from network
+ *
+ * @author Valentine Litvin
+ */
+class NewsNetwork(
+    dataSourceFactory: NewsNetworkDataSourceFactory,
+    boundaryCallback: PagedList.BoundaryCallback<NewsEntity>
+) {
 
     val newsPaged: LiveData<PagedList<NewsEntity>>
     val networkState: LiveData<NetworkState>
