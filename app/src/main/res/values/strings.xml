@@ -3,4 +3,5 @@
 
     <string name="news_image_description">News Image</string>
     <string name="go_to_source">GO TO SOURCE</string>
+    <string name="provided">Provided by NewsAPI</string>
 </resources>
