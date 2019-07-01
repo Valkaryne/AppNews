@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setUpLandView() {
         supportFragmentManager.beginTransaction()
-            .add(R.id.fragments_container_list, NewsListFragment())
+            .replace(R.id.fragments_container_list, NewsListFragment())
             .commit()
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragments_container_details, NewsDetailsFragment(), FRDETAILS_TAG)
